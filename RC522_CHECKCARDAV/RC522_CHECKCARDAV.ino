@@ -4,13 +4,16 @@
 #define SS_PIN 21   // SDA
 #define RST_PIN 22  // RST
 MFRC522 mfrc522(SS_PIN, RST_PIN);
-
+#define OUT4RELAY 33 // output 
 void setup()
 {
   Serial.begin(115200);
   SPI.begin(18,19,23,21);  // SPI.begin(SCK, MISO, MOSI, SS_optional)
   mfrc522.PCD_Init();// Khởi tạo RC522
   Serial.println("da san sang doc the");
+  pinMode(OUT4RELAY,OUTPUT);
+  
+
 }
 
 
@@ -48,7 +51,7 @@ mfrc522.PICC_ReadCardSerial();
     Serial.print(mfrc522.uid.uidByte[i], HEX);
     Serial.print(" ");
   }
-  
+   digitalWrite(OUT4RELAY, HIGH);
   delay (1000);
 
 
